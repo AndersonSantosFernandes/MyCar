@@ -1,8 +1,7 @@
 <?php
 include_once("template/header.php");
-include_once("queryes.php");
-include_once("check_login.php");
 
+include_once("check_login.php");
 
 ?>
 
@@ -36,74 +35,87 @@ include_once("check_login.php");
 
 
             <br>
-            <?php if($lineCar > 0):?>
+            <?php if ($lineCar > 0): ?>
                 <?php foreach ($showCars as $cars): ?>
-                <div class="showCar">
+                    <div class="showCar">
 
-                    <div class="row">
-                        <div class="col-md-7">
-                            <h5>Marca:
-                                <?= $cars["marca"] ?>
-                            </h5>
-                            <h5>Modelo:
-                                <?= $cars["modelo"] ?>
-                            </h5>
-                            <h5>Ano:
-                                <?= $cars["ano"] ?>
-                            </h5>
-                            <h5>Placa:
-                                <?= $cars["placa"] ?>
-                            </h5>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="row rowBtn">
-
-                                <form action="delCar.php" method="post">
-                                    <input type="hidden" name="carId" value="<?= $cars["car_id"] ?>">
-                                    <input type="submit" value="Deletar" class="btnInicio">
-                                </form>
-                                <form action="consumo.php" method="post">
-                                    <input type="hidden" name="carId" value="<?= $cars["car_id"] ?>">
-                                    <input type="submit" value="consumo" class="btnInicio">
-                                </form>
-
-
-
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h5>Marca:
+                                    <?= $cars["marca"] ?>
+                                </h5>
+                                <h5>Modelo:
+                                    <?= $cars["modelo"] ?>
+                                </h5>
+                                <h5>Ano:
+                                    <?= $cars["ano"] ?>
+                                </h5>
+                                <h5>Placa:
+                                    <?= $cars["placa"] ?>
+                                </h5>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 rowManut">
-                                    <form action="manutencao.php" method="post">
+                            <div class="col-md-5">
+                                <div class="row rowBtn">
+
+                                    <form action="delCar.php" method="post">
                                         <input type="hidden" name="carId" value="<?= $cars["car_id"] ?>">
-                                        <input type="submit" value="Manutenções" class="btnManutencao">
+                                        <input type="submit" value="Deletar" class="btnInicio">
                                     </form>
+                                    <form action="consumo.php" method="post">
+                                        <input type="hidden" name="carId" value="<?= $cars["car_id"] ?>">
+                                        <input type="submit" value="consumo" class="btnInicio">
+                                    </form>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 rowManut">
+                                        <form action="manutencao.php" method="post">
+                                            <input type="hidden" name="carId" value="<?= $cars["car_id"] ?>">
+                                            <input type="submit" value="Manutenções" class="btnManutencao">
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
+                    <br>
+                <?php endforeach; ?>
 
-                </div>
-                <br>
-            <?php endforeach; ?>
-                
-                <?php else:?>
+            <?php else: ?>
 
-                    <h3>Você ainda não tem veículo cadástrado</h3>
-                    
-                    <?php endif;?>
+                <h3>Você ainda não tem veículo cadástrado</h3>
 
-            
-
-
+            <?php endif; ?>
 
         </div>
 
 
     </div>
     <div class="escolha">
+        <div>
         <a href="relatorio.php"><button class="btnManutencao">Relatório geral</button></a>
-        <a href="delConta.php"><button class="btnManutencao">Excluir conta</button></a>
+
+        </div>
+        <div>
         <a href="comentarios.php"><button class="btnManutencao">Sugestão/Comentário</button></a>
-    </div>
+       
+            </div>
+            <div>
+            <form action="process.php" method="post">
+            <input type="hidden" name="action" value="tema">
+            <input type="submit" value="Tema" class="btnManutencao">
+        </form>
+            </div>
+            <div>
+            <a href="delConta.php"><button class="btnManutencao">Excluir conta</button></a>
+
+            </div>
+       
+        
+       
+        
+           </div>
     <br>
 </div>
 

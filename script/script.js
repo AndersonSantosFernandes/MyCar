@@ -19,7 +19,7 @@ function showModal() {
             <input type="submit" value="Cadastrar">
         </div>
     </form>
-    <button onclick="hideModal()" class="btnInicio" id="cancel">Cancelar</button>
+    <button onclick="hideModal()" class="btnInicio" id="cancel" style="margin-bottom: 10px;">Cancelar</button>
     `
 }
 

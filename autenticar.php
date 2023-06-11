@@ -18,11 +18,11 @@ $linha = $stmt->rowCount();
 
 
 if($linha == 1){
-    $msgs->setMessage("Logado com suceso, camarada","win");
+    $msgs->setMessage("Logado com sucesso, Bem vindo!!!","win");
     $_SESSION["usuario"]=$email;
     header("location:initial.php");
 }else{
-    $msgs->setMessage("Deu merda, camarada","failure");
+    $msgs->setMessage("Não cadastrado ou e-mail e senha não combinam","failure");
     header("location:index.php");
 }
 

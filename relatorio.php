@@ -10,8 +10,9 @@ include_once("queryes.php");
         <!-- Relatório de manutenção -->
         <div class="col-md-12 relat">
             <h2>Relatório geral de manutenções</h2>
-            <br>
-            <table class="tbRelatorio">
+            <hr>
+            <?php if( $lineManut > 0):?>
+                <table class="tbRelatorio">
                 <tr class="trRelatorio">
                     <td>Carro</td>
                     <td class="hideTd">Tipo de manut.</td>
@@ -47,16 +48,24 @@ include_once("queryes.php");
 
                 <?php endforeach; ?>
             </table>
+                <?php else:?>
+                    <h3>Você ainda não tem históricos de manutenção</h3>
+                    
+                    <?php endif;?>            <!--  -->
+           
         </div>
-
+            <!--  -->
     </div><br>
     <div class="row">
         <!-- Relatório de consumo -->
         
         <div class="col-md-12 relat">
             <h2>Relatório geral de consumo</h2>
-
-            <table class="tbRelatorio">
+            <hr>
+                <!--  -->
+                <?php if($lineConsum > 0):?>
+               
+                    <table class="tbRelatorio">
                 <tr class="trRelatorio">
                     <td>Carro</td>
                     <td>Combustível</td>
@@ -77,6 +86,13 @@ include_once("queryes.php");
                     </tr>
                 <?php endforeach; ?>
             </table>
+                    <?php else:?>
+                    
+                        <h2>Você ainda não tem históricos de consumo </h2>
+                    
+                        <?php endif;?>
+            
+            <!--  -->
         </div>
     </div>
 </div>

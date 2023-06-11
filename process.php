@@ -4,6 +4,7 @@ include_once("model/Mensageira.php");
 
 $msgs = new Mensageira();
 $adm = 0;
+$tema = 0;
 $user2 = $_SESSION['usuario'];//resgata o usuário logado nasessão
 $action = filter_input(INPUT_POST, "action");
 $login = filter_input(INPUT_POST, "act");
@@ -45,14 +46,15 @@ if ($action == "login") {
             $msgs->setMessage("Este nome de e-mail já está em uso! Tente outro", "failure");
         } else {
             if ($senha != $confSenha) {
-                $msgs->setMessage("Seu pateta! as senhas são diferentes", "failure");
+                $msgs->setMessage("As senhas são diferentes", "failure");
             } else {
 
-                $stmtCad = $conn->prepare("INSERT INTO users (name,password, admin)VALUES (:name, md5(:password),:admin)");
+                $stmtCad = $conn->prepare("INSERT INTO users (name,password, admin, tema)VALUES (:name, md5(:password),:admin, :tema)");
 
                 $stmtCad->bindParam(":name", $email);
                 $stmtCad->bindParam(":password", $senha);
                 $stmtCad->bindParam(":admin", $adm);
+                $stmtCad->bindParam(":tema", $tema);
 
                 $stmtCad->execute();
                 $msgs->setMessage("Cadastrado com sucesso", "win");
@@ -174,7 +176,7 @@ if ($action == "login") {
     }
 
     header("location:senha.php");
-} elseif($action == "delConta"){
+} elseif ($action == "delConta"){
 
     $stmtSelect = $conn->prepare("SELECT cr.car_id FROM users us INNER JOIN cars cr WHERE us.name = cr.user AND us.name = :name");
     $stmtSelect->bindParam(":name",$user2);
@@ -214,9 +216,10 @@ if ($action == "login") {
     $msgs->setMessage("Deletedo com sucesso","win");
     
     
-    header("location:initial.php");
+    header("location:index.php");
     session_destroy();
-}elseif($action == "coment"){
+    exit;
+} elseif ($action == "coment"){
 
     if($coment && strlen($coment) > 29 ){
         $stmt = $conn->prepare("INSERT INTO comentarios(coment,user, dtComent)VALUES (:coment, :user, CURRENT_DATE)");
@@ -232,6 +235,26 @@ if ($action == "login") {
   
 
  header("location:comentarios.php");
+} elseif ($action == "tema"){
+
+    $stmt = $conn->prepare("SELECT * FROM users WHERE name = :name");
+    $stmt->bindParam(":name",$user2);
+    $stmt->execute();
+    $showTema = $stmt->fetch();
+    
+    
+    if($showTema['tema'] == 0){
+        $tema = 1;
+    }elseif($showTema['tema'] == 1){
+        $tema = 0;
+    }
+
+    $stmtTema = $conn->prepare("UPDATE users SET tema = :tema WHERE name = :name");
+    $stmtTema->bindParam(":tema",$tema);
+    $stmtTema->bindParam(":name",$user2);
+    $stmtTema->execute();
+
+    header("location:initial.php");
 }
 
 ?>
