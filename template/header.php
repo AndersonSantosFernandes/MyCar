@@ -2,6 +2,10 @@
 
 include_once("conexao.php");
 include_once("model/Mensageira.php");
+include_once("vendor/autoload.php");
+//Referenciando o namespace da dompdf
+use Dompdf\Dompdf;
+
 $msgs = new Mensageira();
 
 $showMsg = $msgs->getMessage();

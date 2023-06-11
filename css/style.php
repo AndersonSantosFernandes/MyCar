@@ -18,7 +18,7 @@ include_once("queryes.php");
 
 <?php elseif ($tema == 1): ?>
     :root{
-    --bgImagem: url("imgs/verticalVerm.jpg") ;
+    --bgImagem: url("imgs/horizonRed.jpg") ;
     --bgImagem2: url("imgs/vertical.jpg") ;
     --principalCor:red;
     --secundariaCor: pink;
@@ -52,9 +52,9 @@ include_once("queryes.php");
     .win {
         margin-top: 3px;
         width: 70%;
-        background-color: green;
+        background-color: greenyellow;
         color: green;
-        border: 1px solid greenyellow;
+        border: 1px solid green;
         margin: auto;
         text-align: center;
     }
