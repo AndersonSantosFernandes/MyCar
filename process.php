@@ -137,7 +137,7 @@ if ($action == "login") {
 
     if ($descricao && $valor && $vlrLitro && $hodometro) {
 
-        $litros = number_format($valor/$vlrLitro , 1) ;
+        $litros = number_format($valor/$vlrLitro , 2,null,null) ;
 
         $stmt = $conn->prepare("INSERT INTO consumo (fuelType,vlrPay, vlrPump, kms, car_id, dataFuel,litros)
         VALUES(:fuelType,:vlrPay, :vlrPump, :kms, :car_id, CURRENT_DATE, :litros)");

@@ -95,6 +95,10 @@ include_once("queryes.php");
             <!--  -->
         </div>
     </div>
+    <div>
+            <a href="pdf.php"><button class="btnManutencao">Gerar PDF</button></a>
+
+            </div>
 </div>
 <script src="script/script.js"></script>
 <?php
