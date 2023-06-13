@@ -3,7 +3,9 @@ include_once("conexao.php");
 include_once("queryes.php");
 
 require_once 'vendor/autoload.php';
-
+$vlrTlManut = $showSomaManut[0];
+$vlrTlConsumo = $showSomaConsumo[0];
+$nrCars = $lineCar;
 use Dompdf\Dompdf;
 
 $html = '<!DOCTYPE html>';
@@ -27,9 +29,13 @@ table td{
    padding: 2px 5px;
     border: 1px solid purple;
 }
+table thead{
+    font-weight: bold;
+ }
 </style>';
 
-
+$html .='<h2>Relatório geral de manutenção e consumo</h2>';
+$html .='<h3>Você tem '.$nrCars.' carro/s</h3>';
 $html .= '<body>';
 
 $html .= '<table>';
@@ -37,7 +43,7 @@ $html .= '<thead>';
 $html .= '
             <tr>
             <td colspan="3">Gerenciamento geral manutenção</td>
-            <td colspan="2"></td>
+            <td colspan="2"> Total manut. R$'.$vlrTlManut.'</td>
             </tr>';
 $html .= '<tr>';
 $html .= '<td>Modelo</td>';
@@ -68,7 +74,7 @@ $html .= '<thead>';
 $html .= '
 <tr>
 <td colspan="5">Gerenciamento geral consumo</td>
-<td colspan="2"></td>
+<td colspan="2">Total consumo R$'.$vlrTlConsumo.'</td>
 </tr>';
 $html .= '<tr>';
 $html .= '<td>Modelo</td>';

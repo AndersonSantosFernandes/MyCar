@@ -48,6 +48,7 @@ include_once("queryes.php");
 
                 <?php endforeach; ?>
             </table>
+          
                 <?php else:?>
                     <h3>Você ainda não tem históricos de manutenção</h3>
                     
