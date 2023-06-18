@@ -5,32 +5,30 @@ include_once("queryes.php");
 
 ?>
 <style>
+    <?php if ($tema == 0): ?>
+        :root {
+            --bgImagem: url("imgs/horizontal1.jpg");
+            --bgImagem2: url("imgs/vertical1.jpg");
+            --principalCor: green;
+            --secundariaCor: greenyellow;
+            --btnCor: rgb(68, 245, 68);
+        }
 
+    <?php elseif ($tema == 1): ?>
+        :root {
+            --bgImagem: url("imgs/horizonRed.jpg");
+            --bgImagem2: url("imgs/vertical.jpg");
+            --principalCor: red;
+            --secundariaCor: pink;
+            --btnCor: rgb(236, 115, 115);
+        }
 
-<?php if ($tema == 0): ?>
-    :root{
-    --bgImagem: url("imgs/horizontal1.jpg") ;
-    --bgImagem2: url("imgs/vertical1.jpg") ;
-    --principalCor:green;
-    --secundariaCor: greenyellow;
-    --btnCor: rgb(68, 245, 68);
-}
-
-<?php elseif ($tema == 1): ?>
-    :root{
-    --bgImagem: url("imgs/horizonRed.jpg") ;
-    --bgImagem2: url("imgs/vertical.jpg") ;
-    --principalCor:red;
-    --secundariaCor: pink;
-    --btnCor: rgb(235, 54, 54);
-}
-
-<?php endif; ?>
+    <?php endif; ?>
 
     body {
-        background-image: var(--bgImagem);        
+        background-image: var(--bgImagem);
         background-attachment: fixed;
-        background-size: cover;      
+        background-size: cover;
     }
 
     .cabecalho {
@@ -43,7 +41,7 @@ include_once("queryes.php");
         background-color: var(--secundariaCor);
         margin: 0 auto;
         padding: 5px 10px;
-        color: var(--principalCor);
+        color: black;
         font-size: 20px;
         font-weight: bold;
     }
@@ -116,8 +114,7 @@ include_once("queryes.php");
     }
 
     .formCad {
-        /* background-color: rgb(43, 143, 231); */
-        /* width: 50%; */
+
         text-align: center;
         padding: 20px;
         border-radius: 10px;
@@ -152,7 +149,7 @@ include_once("queryes.php");
 
     .inicial {
         width: 100%;
-        margin: 30px auto;        
+        margin: 30px auto;
     }
 
     /*pàgina inicial*/
@@ -185,26 +182,11 @@ include_once("queryes.php");
         padding: 5px 25px;
         border-radius: 15px;
     }
-    
-    
 
 
 
-    /* Modal inicial cadastrar novo veículo
-    #newCar {
-        position: sticky;
-        top: 100px;
-        z-index: 30;
-    }
 
-    #newCar form {
-        position: absolute;
-        text-align: center;
-        top: 60px;
-        left: 50%;
-        width: 400px;
-        margin-left: -200px;
-    } */
+
 
 
 
@@ -369,11 +351,122 @@ include_once("queryes.php");
         text-align: center;
     }
 
+
+    /* modaldelcar */
+
+    #delCarro {
+        position: sticky;
+        width: 300px;
+        top: 100px;
+        left: 50%;
+
+        z-index: 30;
+    }
+
+    #modalDeleteCar {
+        background-image: linear-gradient(var(--principalCor), var(--secundariaCor), var(--principalCor));
+        border-radius: 15px;
+        color: black;
+        font-weight: bold;
+        text-align: center;
+        position: absolute;
+        margin-left: -150px;
+        top: 50px;
+        width: 300px;
+        padding-bottom: 7px
+    }
+
+    #delCarro1 {
+        text-align: center;
+        width: 400px;
+        background-image: linear-gradient(var(--principalCor), var(--secundariaCor), var(--principalCor));
+        position: absolute;
+        z-index: 10;
+        left: 50%;
+        margin-left: -200px;
+        top: -380px;
+        transition: all 1.5s;
+        border-radius: 15px;
+        padding: 10px 1px;
+    }
+
+    #delCarro1 form input {
+        width: 80%;
+        margin-bottom: 7px;
+        border-radius: 5px;
+        border: none;
+        padding: 3px 5px;
+    }
+    #newConsumo, #newManutencao {
+        text-align: center;
+        width: 400px;
+        background-image: linear-gradient(var(--principalCor), var(--secundariaCor), var(--principalCor));
+        position: absolute;
+        z-index: 10;
+        left: 50%;
+        margin-left: -200px;
+        top: -460px;
+        transition: all 1.5s;
+        border-radius: 15px;
+        padding: 10px 1px;
+    }
+
+    #newConsumo form input, #newManutencao form input {
+        width: 90%;
+        margin-bottom: 7px;
+        border-radius: 5px;
+        border: none;
+        padding: 3px 5px;
+    }
+    #newConsumo form select, #newManutencao form input {
+        width: 90%;
+        margin-bottom: 7px;
+        border-radius: 5px;
+        border: none;
+        padding: 3px 5px;
+    }
+
+
+
     @media(max-width:500px) {
+
+       #delCarro{
+        width: 100%;
+        margin: 0 auto;
+       
+
+       }
+
+        .modDel {
+            width: 50%;;
+        }
+
+        #modalDeleteCar {
+            left: 0;
+            margin: 0;
+            width: 100%;
+
+        }
+
+ 
+
+        #delCarro1 {
+            width: 100%;
+            left: 0;
+            margin: 0;
+        }
+
+        #newConsumo, #newManutencao {
+            width: 100%;
+            left: 0;
+            margin: 0;
+        }
+
+
         /* Pagina comentários =============================================================*/
 
         textarea {
-            width: 100%;
+            width: 90%;
         }
 
         /* Página senha.php */
@@ -524,14 +617,19 @@ include_once("queryes.php");
         }
 
         /*Consumo*/
+        
         .dateFuel {
             display: none;
         }
 
         #tbConsumo {
             margin-bottom: 15px;
+            margin-left: 0;
+            font-size: 10px;
         }
-
+        .login{
+            margin: 0;
+        }
         /* Relatorio.php */
         .hideTd {
             display: none;

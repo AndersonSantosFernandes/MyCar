@@ -23,19 +23,9 @@ $showTotal = $stmtTotal->fetch();
 
 
 ?>
-<div class="container login">
 
-    <div class="row">
-
-    <div class="col-md-7">
-            <h1 >Nova manutenção</h1>
-            <!-- <button onclick="manutentor()">Nova manutenção</button> -->
-            <!--  -->
-            <div id="showManute">
-
-            </div>
-            <div class="manutCar">
-                <h3>
+<div id="newManutencao">
+<h3>
                     <?= $returnCar["modelo"] ?>
                 </h3>
                 <form action="process.php" method="post">
@@ -59,11 +49,21 @@ $showTotal = $stmtTotal->fetch();
                     </div>
                     <input type="submit" value="Salvar">
                 </form>
+                <button class="btnInicio" onclick="hideForm()">Cancelar</button>
                 <h3>Total gasto com esse carro: R$ <?= formatMoney( $showTotal['sum(value)'])?></h3>
-            </div>
+</div>
+<div class="container login">
+
+    <div class="row">
+
+    <div class="col-md-3">
+            <h1 >Nova manutenção</h1>
+            <button id="btnShow" onclick="showForm()" class="btnInicio">Novo</button>
+        
+            
             <!--  -->
         </div>
-        <div class="col-md-5">
+        <div class="col-md-9">
             <h1>Manutenções <?= $returnCar["modelo"] ?></h1>
             
             <?php foreach ($showManut as $show): ?>
@@ -110,7 +110,22 @@ $showTotal = $stmtTotal->fetch();
 
 
 </div>
+<script>
+    function showForm(){
+    var show = document.getElementById("newManutencao")
+    
+    show.style.top="100px"
+    
 
+}
+function hideForm(){
+    var show = document.getElementById("newManutencao")
+    
+    show.style.top="-460px"
+    
+
+}
+</script>
 <?php
 include_once("template/header.php");
 ?>

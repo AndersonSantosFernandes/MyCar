@@ -62,7 +62,7 @@ if ($action == "login") {
 
         }
     } else {
-        $msgs->setMessage("Preencha todos os campos... Burrão!", "failure");
+        $msgs->setMessage("Preencha todos os campos", "failure");
     }
     header("location:index.php");
 } elseif ($action == "newCar") {
@@ -91,7 +91,7 @@ if ($action == "login") {
     header("location:initial.php");
 
 } elseif ($action == "delCar") {
-    if ($ano && $modelo && $marca && $placa) {
+    if ($carId) {
 
         $stmtManut = $conn->prepare("DELETE FROM maintenance WHERE id_carro = :id");
         $stmtManut->bindParam(":id",$carId);
@@ -104,8 +104,6 @@ if ($action == "login") {
         $stmtCar = $conn->prepare("DELETE FROM cars WHERE car_id = :id");
         $stmtCar->bindParam(":id",$carId);
         $stmtCar->execute();
-
-
 
         $msgs->setMessage("Veículo e informações foram deletadas", "win");
     } else {
@@ -176,7 +174,7 @@ if ($action == "login") {
     }
 
     header("location:senha.php");
-} elseif ($action == "delConta"){
+} elseif ($action == "delConta") {
 
     $stmtSelect = $conn->prepare("SELECT cr.car_id FROM users us INNER JOIN cars cr WHERE us.name = cr.user AND us.name = :name");
     $stmtSelect->bindParam(":name",$user2);
@@ -219,7 +217,7 @@ if ($action == "login") {
     header("location:index.php");
     session_destroy();
     exit;
-} elseif ($action == "coment"){
+} elseif ($action == "coment") {
 
     if($coment && strlen($coment) > 29 ){
         $stmt = $conn->prepare("INSERT INTO comentarios(coment,user, dtComent)VALUES (:coment, :user, CURRENT_DATE)");
@@ -235,7 +233,7 @@ if ($action == "login") {
   
 
  header("location:comentarios.php");
-} elseif ($action == "tema"){
+} elseif ($action == "tema") {
 
     $stmt = $conn->prepare("SELECT * FROM users WHERE name = :name");
     $stmt->bindParam(":name",$user2);
