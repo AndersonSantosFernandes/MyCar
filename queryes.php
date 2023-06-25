@@ -39,6 +39,15 @@ $stmtConsum->execute();
 $showConsum = $stmtConsum->fetchAll();
 $lineConsum = $stmtConsum->rowCount();
 
+//Retorna os consumos de pedágios relacionados ao usuário logado
+$stmtPedagio = $conn->prepare("SELECT * FROM pedagio pe
+INNER JOIN cars ca 
+WHERE pe.car_id = ca.car_id AND ca.user = :user");
+$stmtPedagio->bindParam(":user",$user);
+$stmtPedagio->execute();
+$showPedagio = $stmtPedagio->fetchAll();
+$linePedagio = $stmtPedagio->rowCount();
+
 //Administrador encherga os comentários de todos o usuários
 if($admin == 1 ){
     $stmtComent = $conn->prepare("SELECT * FROM comentarios");
@@ -72,6 +81,16 @@ us.name = :name");
 $stmtSomaConsumo->bindParam(":name",$user);
 $stmtSomaConsumo->execute();
 $showSomaConsumo = $stmtSomaConsumo->fetch();
+
+//Retorna o total gasto com pedágio
+$stmtSomaPedagio = $conn->prepare("SELECT SUM(ped.valor) FROM users us INNER JOIN cars cr INNER JOIN pedagio ped WHERE
+us.name = cr.user AND
+cr.car_id = ped.car_id AND
+us.name = :name");
+
+$stmtSomaPedagio->bindParam(":name",$user);
+$stmtSomaPedagio->execute();
+$showSomaPedagio = $stmtSomaPedagio->fetch();
 
 
 ?>

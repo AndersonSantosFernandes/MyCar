@@ -5,6 +5,7 @@ include_once("queryes.php");
 require_once 'vendor/autoload.php';
 $vlrTlManut = $showSomaManut[0];
 $vlrTlConsumo = $showSomaConsumo[0];
+$vlrTlPedagio = $showSomaPedagio[0];
 $nrCars = $lineCar;
 use Dompdf\Dompdf;
 
@@ -41,7 +42,7 @@ table thead{
 </style>';
 
 
-$html .= '<h2>Relatório geral de manutenção e consumo</h2>';
+$html .= '<h2>Relatório geral de manutenção, consumo e pedágio</h2>';
 if ($nrCars == 1) {
     $html .= '<h3>Você tem ' . $nrCars . ' veículo</h3>';
 } elseif ($nrCars > 1) {
@@ -68,7 +69,7 @@ if ($lineManut < 1) {
     $html .= '
                 <tr>
                 <td colspan="3">Gerenciamento geral manutenção</td>
-                <td colspan="2"> Total manut. R$' . $vlrTlManut . '</td>
+                <td colspan="2"> Total manut. R$ ' . $vlrTlManut . '</td>
                 </tr>';
     $html .= '<tr>';
     $html .= '<td>Modelo</td>';
@@ -106,7 +107,7 @@ if ($lineConsum < 1) {
     $html .= '
     <tr>
     <td colspan="5">Gerenciamento geral consumo</td>
-    <td colspan="2">Total consumo R$' . $vlrTlConsumo . '</td>
+    <td colspan="2">Total consumo R$ ' . $vlrTlConsumo . '</td>
     </tr>';
     $html .= '<tr>';
     $html .= '<td>Modelo</td>';
@@ -137,6 +138,43 @@ if ($lineConsum < 1) {
     $html .= '</table>';
 
 }
+$html .= '<br>';
+// Tabela de pedágio
+
+if ($lineConsum < 1) {
+    $html .= '<h3>Nenhum pedágio ainda</h3>';
+} else {
+    $html .= '<table>';
+    $html .= '<thead>';
+    $html .= '
+    <tr>
+    <td colspan="2">Gerenciamento geral pedágio</td>
+    <td colspan="2">Total pedágio R$ ' . $vlrTlPedagio . '</td>
+    </tr>';
+    $html .= '<tr>';
+    $html .= '<td>Carro</td>';
+    $html .= '<td>Destino</td>';
+    $html .= '<td>Valor pago</td>';
+    $html .= '<td>Data</td>';
+    $html .= '</tr>';
+    $html .= '</thead>';
+
+    foreach ($showPedagio as $pedagio) {
+
+
+        $html .= '<tbody>';
+        $html .= '<tr><td>' . $pedagio['modelo'] . '</td>';
+        $html .= '<td>' . $pedagio['destino'] . '</td>';
+        $html .= '<td>' . $pedagio['valor'] . '</td>';
+        $html .= '<td>' . invertDate($pedagio['pedagio_data']) . '</td></tr>';
+        $html .= '</tbody>';
+
+    }
+    $html .= '</table>';
+
+}
+
+
 $html .= '<br>' . $user . '';
 $html .= '</body>';
 $html .= '</html>';

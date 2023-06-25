@@ -109,7 +109,77 @@ include_once("queryes.php");
 
             <!--  -->
         </div>
+
+        <!-- Relatório de pedágio -->
+
+
+    </div><br>
+    <div class="row">
+        <div class="col-md-12 relat">
+            <h2>Relatório geral de pedágio</h2>
+            <hr>
+            <!--  -->
+            <?php if ($linePedagio > 0): ?>
+                <table class="tbRelatorio">
+                    <tr class="trRelatorio">
+                        <td>
+                            <h5>Carro</h5>
+                        </td>
+                        <td>
+                            <h5>Destino:</h5>
+                        </td>
+                        <td>
+                            <h5>Vlr pago:</h5>
+                        </td>
+                        <td>
+                            <h5>Data:</h5>
+                        </td>
+                    </tr>
+
+                    <?php foreach ($showPedagio as $showPed): ?>
+                        <tr>
+                            <td>
+                                <h5>
+                                    <?= $showPed['modelo'] ?>
+                                </h5>
+                            </td>
+                            <td>
+                                <h5>
+                                    <?= $showPed['destino'] ?>
+                                </h5>
+                            </td>
+                            <td>
+                                <h5>
+                                    R$
+                                    <?= formatMoney($showPed['valor']) ?>
+                                </h5>
+                            </td>
+
+
+                            <td>
+                                <h5>
+                                    <?= invertDate($showPed['pedagio_data']) ?>
+                                </h5>
+                            </td>
+
+                        </tr>
+
+
+
+                    <?php endforeach; ?>
+                </table>
+
+            <?php else: ?>
+
+                <h2>Você ainda não tem históricos de pedágio </h2>
+
+            <?php endif; ?>
+
+            <!--  -->
+        </div>
     </div>
+
+
     <?php if ($lineCar > 0): ?>
         <div>
             <a href="pdf.php"><button class="btnManutencao">Gerar PDF</button></a>

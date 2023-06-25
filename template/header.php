@@ -46,11 +46,11 @@ if (!empty($showMsg["message"])) {
                 <!-- formulario de saída de sessão -->
                     <form action="process.php" method="post">
                         <input type="hidden" name="action" value="destroy">
-                        <input type="submit" value="Sair" class="btnInicio">
+                        <input type="submit" value="Sair" class="btnInicio1">
                     </form>
         
-                    <a href="initial.php"> <button class="btnInicio">Inicio</button> </a>
-                    <a href="senha.php"> <button class="btnInicio">Senha</button> </a>
+                    <a href="initial.php"> <button class="btnInicio1">Inicio</button> </a>
+                    <a href="senha.php"> <button class="btnInicio1">Senha</button> </a>
                 
             </div>
 

@@ -1,150 +1,139 @@
+body {
+    background-image: url("../imgs/horizontal1.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+}
 
-    body {
-        background-image: url("../imgs/horizontal1.jpg");        
-        background-attachment: fixed;
-        background-size: cover;      
+
+
+.cabecalho {
+    width: 84%;
+    background-color: greenyellow;
+    margin: 0 auto;
+    padding: 5px 10px;
+    color: green;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/*Mensagem positiva*/
+.win {
+    margin-top: 3px;
+    width: 70%;
+    background-color: greenyellow;
+    color: green;
+    border: 1px solid green;
+    margin: auto;
+    text-align: center;
+}
+
+/*mensagem negativa*/
+.failure {
+    margin-top: 3px;
+    width: 70%;
+    background-color: pink;
+    color: red;
+    border: 1px solid red;
+    margin: auto;
+    text-align: center;
+}
+
+/*Inputs de login*/
+.prin {
+    margin-left: 10px;
+}
+
+/*página de login*/
+
+
+#logar input {
+    border: none;
+    border-radius: 5px;
+    padding-left: 7px;
+    margin: 5px;
+}
+
+.btnInicio {
+    width: 100px;
+    height: 40px;
+    background-image: linear-gradient(green, greenyellow);
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+
+.login {
+
+
+    color: aliceblue;
+
+}
+
+
+
+
+#cadastrar1 {
+    text-align: center;
+    width: 400px;
+    background-image: linear-gradient(green, greenyellow, green);
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    margin-left: -200px;
+    top: -300px;
+    transition: all 1s;
+    border-radius: 15px;
+    padding: 10px 1px;
+}
+
+#cadastrar1 form input {
+    width: 90%;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    padding: 4px 5px;
+
+}
+
+
+
+@media(max-width:500px) {
+
+    #cadastrar1 {
+        width: 100%;
+        left: 0;
+        margin: 0;
+
     }
 
-    
-
-    .cabecalho {
-        width: 84%;
-        background-color: greenyellow;
-        margin: 0 auto;
-        padding: 5px 10px;
-        color: green;
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    /*Mensagem positiva*/
-    .win {
-        margin-top: 3px;
-        width: 70%;
-        background-color: greenyellow;
-        color: green;
-        border: 1px solid green;
-        margin: auto;
-        text-align: center;
-    }
-
-    /*mensagem negativa*/
-    .failure {
-        margin-top: 3px;
-        width: 70%;
-        background-color: pink;
-        color: red;
-        border: 1px solid red;
-        margin: auto;
-        text-align: center;
-    }
-
-    /*Inputs de login*/
-    .prin {
-        margin-left: 10px;
+    .login {
+        width: 100%;
+        padding: 0px;
     }
 
     /*página de login*/
-
-
-    #logar input {
-        border: none;
-        border-radius: 5px;
-        padding-left: 7px;
-        margin: 5px;
-    }
-
-    .btnInicio {
-        width: 100px;
-        height: 40px;
-        background-image: linear-gradient(green, greenyellow);
-        border-radius: 8px;
-        font-size: 18px;
-        font-weight: bold;
-        
-    }
-
-
-    .login {
-
-       
-        color: aliceblue;
-     
-    }
-
-   
-
-    .divInput {
-        margin: 20px auto;
-    } 
-
-    .divInput input {
-        border-radius: 10px;
-        border: none;
-        padding-left: 10px;
+    .cabecalho {
         width: 100%;
     }
-   
-    #cadastrar1{
-        text-align: center;
-        width: 400px;
-        background-image: linear-gradient(green, greenyellow, green) ;
-        position: absolute;
-        z-index: 10;
-        left: 50%;
-        margin-left: -200px;
-        top: -300px;
-        transition: all 1s;
-        border-radius: 15px;
-        padding: 10px 1px;
-    }
-    #cadastrar1 form input{
-width: 90%;
-margin-bottom: 10px;
-border: none;
-border-radius: 5px;
-padding: 4px 5px;
 
+    #logar input {
+        width: 100%;
     }
 
-   
+    body {
 
-    @media(max-width:500px) {
-        
-        #cadastrar1{
-            width: 100%;
-            left: 0;
-            margin: 0;
-            
-        }
-        .login {
-            width: 100%;
-            padding: 0px;
-        }
-
-        /*página de login*/
-        .cabecalho {
-            width: 100%;
-        }
-
-        #logar input {
-            width: 100%;
-        }
-
-        body {
-
-            background-image: url("../imgs/vertical1.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-        }      
-
-        .formCadCar {
-            width: 100%;
-        }
-        .icon{
-            display: none;
-        }
-
-
+        background-image: url("../imgs/vertical1.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
     }
+
+    
+    .icon {
+        display: none;
+    }
+
+
+}

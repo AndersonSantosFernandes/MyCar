@@ -24,6 +24,7 @@ $data = filter_input(INPUT_POST, "data");
 $vlrLitro = filter_input(INPUT_POST, "vlrLitro");
 $hodometro = filter_input(INPUT_POST, "hodometro");
 $coment = filter_input(INPUT_POST, "comentar");
+$destino = filter_input(INPUT_POST, "destino");
 
 if ($action == "login") {
     echo $login;
@@ -100,6 +101,10 @@ if ($action == "login") {
         $stmtConsum = $conn->prepare("DELETE FROM consumo WHERE car_id = :id");
         $stmtConsum->bindParam(":id",$carId);
         $stmtConsum->execute();
+
+        $stmtPedagio = $conn->prepare("DELETE FROM pedagio WHERE car_id = :id");
+        $stmtPedagio->bindParam(":id",$carId);
+        $stmtPedagio->execute();
 
         $stmtCar = $conn->prepare("DELETE FROM cars WHERE car_id = :id");
         $stmtCar->bindParam(":id",$carId);
@@ -195,6 +200,10 @@ if ($action == "login") {
         $stmtDelConsum->bindParam(":car_id",$carro);
         $stmtDelConsum->execute();
 
+        $stmtDelPedagio = $conn->prepare("DELETE FROM pedagio WHERE car_id = :car_id");
+        $stmtDelPedagio->bindParam(":car_id",$carro);
+        $stmtDelPedagio->execute();
+
         $stmtDelCar = $conn->prepare("DELETE FROM cars WHERE car_id = :car_id");
         $stmtDelCar->bindParam(":car_id",$carro);
         $stmtDelCar->execute();
@@ -252,6 +261,28 @@ if ($action == "login") {
     $stmtTema->bindParam(":name",$user2);
     $stmtTema->execute();
 
+    header("location:initial.php");
+} elseif ($action =="pedagio"){
+
+    if($destino && $valor && $carId){
+
+        $stmt = $conn->prepare("INSERT INTO pedagio(destino,valor,pedagio_data, car_id)
+    VALUES(:destino, :valor, CURRENT_DATE, :car_id)");
+    $stmt->bindParam(":destino",$destino);
+    $stmt->bindParam(":valor",$valor);
+    $stmt->bindParam(":car_id",$carId);
+
+    $stmt->execute();
+
+
+    $msgs->setMessage("Salvo com sucesso","win");
+    }else{
+
+        $msgs->setMessage("Preencha todos os campos","failure");   
+
+    }
+
+    
     header("location:initial.php");
 }
 

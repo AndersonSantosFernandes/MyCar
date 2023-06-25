@@ -84,7 +84,16 @@ include_once("queryes.php");
     }
 
     .btnInicio {
-        width: 100px;
+        width: 120px;
+        height: 40px;
+        background-image: linear-gradient(var(--principalCor), var(--btnCor));
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .btnInicio1 {
+        width: 90px;
         height: 40px;
         background-image: linear-gradient(var(--principalCor), var(--btnCor));
         border-radius: 8px;
@@ -153,6 +162,9 @@ include_once("queryes.php");
     }
 
     /*pàgina inicial*/
+    .rowBtn{
+    margin: 10px auto; 
+    }
     .rowBtn {
         justify-content: space-around;
     }

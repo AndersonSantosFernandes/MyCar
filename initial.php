@@ -8,7 +8,7 @@ include_once("check_login.php");
 
 </div>
 <div id="delCarro1">
-    <form action="process.php" method="post" >
+    <form action="process.php" method="post">
         <input type="hidden" name="action" value="newCar">
         <div>
             <input type="text" name="marca" id="marca" placeholder="Marca">
@@ -31,7 +31,7 @@ include_once("check_login.php");
 <div class="container login ">
 
     <div class="row">
-       
+
         <div class="col-md-8">
 
             <h1>Meus carros <button id="btnShow" onclick="showForm()" class="btnInicio">Novo</button></h1>
@@ -57,7 +57,7 @@ include_once("check_login.php");
                                     <?= $cars["placa"] ?>
                                 </h5>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-5 geralButtons">
                                 <div class="row rowBtn">
 
 
@@ -70,13 +70,21 @@ include_once("check_login.php");
                                     </form>
 
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12 rowManut">
+
+                                <div class="row rowBtn">
+                                    <!-- <div class="col-md-5"> -->
                                         <form action="manutencao.php" method="post">
                                             <input type="hidden" name="carId" value="<?= $cars["car_id"] ?>">
-                                            <input type="submit" value="Manutenções" class="btnManutencao">
+                                            <input type="submit" value="Manutenção" class="btnInicio">
                                         </form>
-                                    </div>
+                                    <!-- </div>
+                                    <div class="col-md-5"> -->
+                                        <form action="pedagio.php" method="post">
+                                            <input type="hidden" name="carId" value="<?= $cars["car_id"] ?>">
+                                            <input type="submit" value="Pedágio" class="btnInicio">
+                                        </form>
+
+                                    <!-- </div> -->
                                 </div>
                             </div>
                         </div>
@@ -95,9 +103,9 @@ include_once("check_login.php");
         <div class="col-md-4">
             <h1>Ações</h1>
             <div class="escolha">
-                
-                
-               
+
+
+
                 <div>
                     <a href="relatorio.php"><button class="btnManutencao">Relatório geral</button></a>
 
@@ -117,7 +125,7 @@ include_once("check_login.php");
 
                 </div>
                 <div>
-                <a href="sobre.php"><button class="btnManutencao">Sobre</button></a>
+                    <a href="sobre.php"><button class="btnManutencao">Sobre</button></a>
                 </div>
 
 
@@ -131,29 +139,29 @@ include_once("check_login.php");
     <br>
 </div>
 <script>
-    function showForm(){
-    var show = document.getElementById("delCarro1")
-    
-    show.style.top="100px"
-    
+    function showForm() {
+        var show = document.getElementById("delCarro1")
 
-}
-function hideForm(){
-    var show = document.getElementById("delCarro1")
-    
-    show.style.top="-380px"
-    
-
-}
-
-function delCar(vlrCar){
+        show.style.top = "100px"
 
 
+    }
+    function hideForm() {
+        var show = document.getElementById("delCarro1")
 
-var modalDelCar = document.getElementById("delCarro")
+        show.style.top = "-380px"
 
-modalDelCar.innerHTML=
-`
+
+    }
+
+    function delCar(vlrCar) {
+
+
+
+        var modalDelCar = document.getElementById("delCarro")
+
+        modalDelCar.innerHTML =
+            `
 <div id="modalDeleteCar">
 <h4>Tem certeza?</h4>
 <p>Clicando em deletear todos os dados do veículo serão apagados com ele</p>
@@ -179,14 +187,14 @@ modalDelCar.innerHTML=
 
 
 
-}
+    }
 
-function cancelDel(){
+    function cancelDel() {
 
-var modalDelCar = document.getElementById("delCarro")
+        var modalDelCar = document.getElementById("delCarro")
 
-modalDelCar.innerHTML=``
-}
+        modalDelCar.innerHTML = ``
+    }
 
 
 </script>
