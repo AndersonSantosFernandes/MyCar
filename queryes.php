@@ -5,6 +5,12 @@ include_once("conexao.php");
 if(isset($_SESSION["usuario"])){
     $user = $_SESSION["usuario"]; 
 }
+// Somente para contar o número de usuários cadastrados
+$totalUser = $conn->query("SELECT * FROM users");
+$totalUser->execute();
+$allUsers = $totalUser->fetchAll();
+$showTlUsers = $totalUser->rowCount();
+
 
 //Retorna informações para diferir administrador e usuário comum
 $stmtUser = $conn->prepare("SELECT* FROM users WHERE name = :name");

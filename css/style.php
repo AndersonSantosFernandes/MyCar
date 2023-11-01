@@ -310,6 +310,7 @@ include_once("queryes.php");
         padding: 15px;
         border-radius: 10px;
     }
+    
 
     .formPass {
         width: 85%;

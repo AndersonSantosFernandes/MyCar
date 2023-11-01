@@ -2,6 +2,13 @@
 include_once("template/header.php");
 include_once("queryes.php");
 include_once("check_login.php");
+if($admin == 1){
+$display = "none";
+
+}else{
+    $display = "block"; 
+   
+}
 ?>
 
 <div class="container login ">
@@ -22,17 +29,32 @@ include_once("check_login.php");
 </div>
 <?php else:?>
     <h1>Comentários de usuários</h1>
+    <h4>  <a href="allUsers.php">Existem <?= $showTlUsers ?> usuários cadastrados</a></h4>
 <?php endif;?>
 
 <?php if($lineComent > 0):?>
 
     <div class="listComent">
     <?php foreach($showComent as $coment):?>
-        <p> Em <strong> <?= invertDate( $coment['dtComent']) ?></strong> o usuário 
-        <strong> <?= $coment['user'] ?></strong>
-        escreveu o seguinte comentério:</p>
+
+        <form action="editMessage.php" method="post">
+            <input type="hidden" name="idcoment" value="<?= $coment['coment_id']?>">
+            <input type="submit" class="btnManutencao" value="Editar msg" style="display: <?=$display?>;">
+        </form>
+
+        <?php 
+        if($admin == 1){
+            $respMess = " o usuário ".$coment['user']." ";
+        }else{
+            $respMess = " você ";
+        }
+        ?>
+        <p><strong> Em  <?= invertDate( $coment['dtComent']) ?>
+         <?= $respMess ?>
+        escreveu o seguinte comentério: </strong></p>
         <p class="pCom"><?= $coment['coment'] ?></p>
 
+        
     
         
         <?php endforeach;?>

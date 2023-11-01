@@ -18,5 +18,6 @@ function formatMoney($valor, $separa = ".", $junta = ","){
     return implode($junta,explode($separa, $valor));
 }
 
+
 ?>
 

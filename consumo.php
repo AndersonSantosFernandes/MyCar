@@ -50,6 +50,8 @@ $showTotal = $stmtTotal->fetch();
         <input type="submit" value="Salvar" class="btnInicio">
     </form>
     <button class="btnInicio" onclick="hideForm()">Cancelar</button>
+    <br>
+    <h4>Total gasto com esse veículo: <br>R$  <?= formatMoney($showTotal['sum(vlrPay)'])?> </h4>
 </div>
 
 <div class="container login ">

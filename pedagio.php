@@ -49,7 +49,7 @@ $showTotal = $stmtTotal->fetch();
     </form>
     <button class="btnInicio" onclick="hideForm()">Cancelar</button>
     <hr>
-    <h4>Total gasto com esse carro: <br>R$ <?= formatMoney($showTotal[0]) ?></h4>
+    <h4>Total gasto com esse veículo: <br>R$ <?= formatMoney($showTotal[0]) ?></h4>
 </div>
 
 <div class="container login ">

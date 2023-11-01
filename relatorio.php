@@ -49,7 +49,7 @@ include_once("queryes.php");
 
                     <?php endforeach; ?>
                 </table>
-
+                <a href="csv.php?act=manutencao">Gerar CSV</a>
             <?php else: ?>
                 <h3>Você ainda não tem históricos de manutenção</h3>
 
@@ -93,7 +93,7 @@ include_once("queryes.php");
                                 <?= formatMoney($consum["vlrPump"]) ?>
                             </td>
                             <td class="hideTd">
-                                <?= $consum["placa"] ?>
+                                <?= invertDate( $consum["dataFuel"]) ?>
                             </td>
                             <td>
                                 <?= $consum["litros"] ?> L
@@ -101,6 +101,7 @@ include_once("queryes.php");
                         </tr>
                     <?php endforeach; ?>
                 </table>
+                <a href="csv.php?act=consumo">Gerar CSV</a>
             <?php else: ?>
 
                 <h2>Você ainda não tem históricos de consumo </h2>
@@ -111,14 +112,12 @@ include_once("queryes.php");
         </div>
 
         <!-- Relatório de pedágio -->
-
-
     </div><br>
     <div class="row">
         <div class="col-md-12 relat">
             <h2>Relatório geral de pedágio</h2>
             <hr>
-            <!--  -->
+            
             <?php if ($linePedagio > 0): ?>
                 <table class="tbRelatorio">
                     <tr class="trRelatorio">
@@ -135,58 +134,36 @@ include_once("queryes.php");
                             <h5>Data:</h5>
                         </td>
                     </tr>
-
                     <?php foreach ($showPedagio as $showPed): ?>
                         <tr>
                             <td>
-                                <h5>
-                                    <?= $showPed['modelo'] ?>
-                                </h5>
+                                <?= $showPed['modelo'] ?>
                             </td>
                             <td>
-                                <h5>
-                                    <?= $showPed['destino'] ?>
-                                </h5>
+                                <?= $showPed['destino'] ?>
                             </td>
                             <td>
-                                <h5>
-                                    R$
-                                    <?= formatMoney($showPed['valor']) ?>
-                                </h5>
+                                R$
+                                <?= formatMoney($showPed['valor']) ?>
                             </td>
-
-
                             <td>
-                                <h5>
-                                    <?= invertDate($showPed['pedagio_data']) ?>
-                                </h5>
+                                <?= invertDate($showPed['pedagio_data']) ?>
                             </td>
-
                         </tr>
-
-
-
                     <?php endforeach; ?>
                 </table>
-
+                <a href="csv.php?act=pedagio">Gerar CSV</a>
             <?php else: ?>
-
                 <h2>Você ainda não tem históricos de pedágio </h2>
-
             <?php endif; ?>
-
             <!--  -->
         </div>
     </div>
-
-
     <?php if ($lineCar > 0): ?>
         <div>
             <a href="pdf.php"><button class="btnManutencao">Gerar PDF</button></a>
         </div>
     <?php endif; ?>
-
-
 </div>
 <script src="script/script.js"></script>
 <?php

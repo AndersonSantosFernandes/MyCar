@@ -8,6 +8,7 @@ include_once("check_login.php");
 
 </div>
 <div id="delCarro1">
+    <h4>Cadastrar novo veículo</h4>
     <form action="process.php" method="post">
         <input type="hidden" name="action" value="newCar">
         <div>

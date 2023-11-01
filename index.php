@@ -1,6 +1,9 @@
 <?php
 include_once("conexao.php");
 include_once("model/Mensageira.php");
+
+$recuperar = filter_input(INPUT_GET, "recupera");
+
 $msgs = new Mensageira();
 
 $showMsg = $msgs->getMessage();
@@ -80,8 +83,27 @@ if (!empty($showMsg["message"])) {
                         <p>Datas</p>
                     </ul>
                     <p>Para se cadastras é só clicar no botão abaixo: <br>
-                        <button onclick="showForm()" class="btnInicio">Cadastrar</button>
+                        <button onclick="showForm()" class="btnInicio1">Cadastrar</button>
+                        <button onclick="showFormPass()" class="btnInicio1">Esqueci a senha</button>
                     </p>
+                </div>
+
+                <div id="recupera">
+                   
+                    <form action="process.php" method="post" class="formPass">
+                    Insira seu e-mail e placa de um veículo cadastrado para redefinir sua senha
+                        <input type="hidden" name="action" value="recuperar">
+                        <input type="email" name="email" id="" placeholder="E-mail cadastrado">
+                        <input type="text" name="placa" id="" placeholder="Placa de um veículo cadastrado">
+                        <input type="submit" value="Recuperar">
+                    </form>
+                </div>
+
+                <hr>
+                <hr>
+
+                <div id="formSenha">
+
                 </div>
 
             </div>
@@ -118,6 +140,41 @@ if (!empty($showMsg["message"])) {
         function hideForm() {
             var mostraForm = window.document.getElementById("cadastrar1");
             mostraForm.style.top = "-300px"
+        }
+
+        function showFormPass() {
+            var mostraForm = window.document.getElementById("recupera");
+            mostraForm.style.top = "90px"
+        }
+        function hideFormPass() {
+            var mostraForm = window.document.getElementById("recupera");
+            mostraForm.style.top = "-300px"
+        }
+
+        function setpass(){
+            var formsenha = document.getElementById("formSenha")
+
+            formsenha.innerHTML =
+            `
+            <form action="process.php" method="post" class="formPass">
+                        <input type="hidden" name="action" value="setPass">
+                        <input type="hidden" name="user" value="<?= $recuperar ?>">
+                        <div class="divInput">
+                            <input type="password" name="pass" id="pass" placeholder="Senha" minlength="6"
+                                maxlength="12">
+                        </div>
+                        <div class="divInput">
+                            <input type="password" name="confPass" id="confPass" placeholder="Confirma Senha"
+                                minlength="6" maxlength="12">
+                        </div>
+                        <div class="divInput">
+                            <input type="submit" value="Alterar">
+                        </div>
+                    </form>
+            `
+
+
+
         }
 
 

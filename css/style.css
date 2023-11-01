@@ -62,6 +62,20 @@ body {
     font-weight: bold;
 
 }
+.btnInicio1 {
+    width: 150px;
+    height: 40px;
+    background-image: linear-gradient(green, greenyellow);
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+
+}
+.btnRec{
+    width: max-content;
+    background-image: linear-gradient(green, greenyellow);
+    border-radius: 4px;
+}
 
 
 .login {
@@ -70,8 +84,43 @@ body {
     color: aliceblue;
 
 }
+/* Recuperação de senha */
+#formSenha{
+
+    width: 400px;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    margin-left: -200px;
+    transition: all 1s;
+}
 
 
+.formPass{
+    width: 400px;
+    text-align: center;
+    background-image: linear-gradient(green, greenyellow, green);
+    padding: 15px;
+    border-radius: 10px;
+   
+}
+
+.formPass input{
+    width: 85%;
+    padding: 2px 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+/* Recupera inserir email e placa */
+#recupera{
+    width: 400px;
+    position: absolute;
+    left: 50%;
+    margin-left: -200px;
+    top: -400px;
+    transition: all 1.5s;
+}
 
 
 #cadastrar1 {
@@ -100,7 +149,9 @@ body {
 
 
 @media(max-width:500px) {
-
+    #formPass{
+        width: 100%;
+    }
     #cadastrar1 {
         width: 100%;
         left: 0;

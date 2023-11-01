@@ -5,17 +5,24 @@ include_once("model/Mensageira.php");
 $msgs = new Mensageira();
 $adm = 0;
 $tema = 0;
-$user2 = $_SESSION['usuario'];//resgata o usuário logado nasessão
+
+if(isset($_SESSION['usuario'])){
+    $user2 =  $_SESSION['usuario'];//resgata o usuário logado nasessão
+}
+
+
+
+
 $action = filter_input(INPUT_POST, "action");
 $login = filter_input(INPUT_POST, "act");
-$email = filter_input(INPUT_POST, "email");
+$email = filter_input(INPUT_POST, "email");// Recebe o usuário
 $senha = filter_input(INPUT_POST, "pass");
 $confSenha = filter_input(INPUT_POST, "confPass");
 $user = filter_input(INPUT_POST, "user");
 $marca = filter_input(INPUT_POST, "marca");
 $modelo = filter_input(INPUT_POST, "modelo");
 $ano = filter_input(INPUT_POST, "ano");
-$placa = strtoupper(filter_input(INPUT_POST, "placa"));
+$placa = strtoupper(filter_input(INPUT_POST, "placa"));//recebe a placa do veículo
 $carId = filter_input(INPUT_POST, "carId");
 $services = filter_input(INPUT_POST, "services");
 $descricao = filter_input(INPUT_POST, "descricao"); //recebe descrição e tipo de combustível
@@ -24,6 +31,7 @@ $data = filter_input(INPUT_POST, "data");
 $vlrLitro = filter_input(INPUT_POST, "vlrLitro");
 $hodometro = filter_input(INPUT_POST, "hodometro");
 $coment = filter_input(INPUT_POST, "comentar");
+$comentId = filter_input(INPUT_POST, "comentId");
 $destino = filter_input(INPUT_POST, "destino");
 
 if ($action == "login") {
@@ -81,7 +89,7 @@ if ($action == "login") {
 
         $stmt->execute();
 
-        $msgs->setMessage("Seu carro de marca: " . $marca . ", modelo: " . $modelo . " e ano: " . $ano . " Foi cadastrado com sucesso", "win");
+        $msgs->setMessage("Seu veículo de marca: " . $marca . ", modelo: " . $modelo . " e ano: " . $ano . " Foi cadastrado com sucesso", "win");
 
     } else {
 
@@ -154,7 +162,7 @@ if ($action == "login") {
 
         $stmt->execute();
 
-        $msgs->setMessage("Salvo com sucesso", "win");
+        $msgs->setMessage("Salvo com sucesso! Verifique na bomba se deu ".$litros." litros" , "win");
     } else {
         $msgs->setMessage("Preencha todos os campos", "failure");
     }
@@ -284,6 +292,76 @@ if ($action == "login") {
 
     
     header("location:initial.php");
+} elseif ($action == "updateComent"){
+ 
+
+
+if($coment && strlen($coment) > 29 ){
+
+    $stmt = $conn->prepare("UPDATE comentarios SET coment = :coment WHERE coment_id = :coment_id");
+$stmt->bindParam(":coment_id",$comentId);
+$stmt->bindParam(":coment",$coment);
+$stmt->execute();
+    
+    $msgs->setMessage("Comentário atualizado com sucesso","win"); 
+}else{
+    $msgs->setMessage("Comentário não salvo! Insira ao menos 30 caracteres","failure");
+}
+header("location:comentarios.php");
+
+} elseif ($action == "recuperar"){
+
+    if($email && $placa){
+
+    $stmtUser = $conn->prepare("SELECT * FROM users WHERE name = :name");
+    $stmtUser->bindParam(":name",$email);
+    $stmtUser->execute();
+
+    $showUser = $stmtUser->fetch(PDO::FETCH_ASSOC);
+
+    $stmtCar = $conn->prepare("SELECT * FROM cars WHERE placa = :placa ");
+    $stmtCar->bindParam(":placa",$placa);
+    $stmtCar->execute();
+
+    $showPlaca = $stmtCar->fetch(PDO::FETCH_ASSOC);
+if($showUser['name'] == $email && $showPlaca['user'] == $showUser['name']){
+    
+        $msgs->setMessage("<button onclick='setpass()' class='btnRec'>Redefinir senha</button>","win");
+    
+        $usuario = $showUser['name'];
+    
+}else{
+    
+    $msgs->setMessage("E-mail não confere com a placa do seu veículo","failure");
+}
+   
+    }else{
+        $msgs->setMessage("Preencha os dois campos","failure");
+        
+    }
+    header("location:index.php?recupera=".$usuario);
+
+} elseif ($action == "setPass"){
+
+    if ($senha && $confSenha) {
+        if ($senha != $confSenha) {
+
+            $msgs->setMessage("Senhas não conferem. Preencha novamente e-mail e placa", "failure");
+        } else {
+            $stmt = $conn->prepare("UPDATE users SET password = md5(:password) WHERE name = :name");
+            $stmt->bindParam(":password", $senha);
+            $stmt->bindParam(":name",$user);
+            $stmt->execute();
+
+            $msgs->setMessage("Alterado com sucesso", "win");
+        }
+
+    } else {
+        $msgs->setMessage("Prencha corretamente", "failure");
+    }
+
+    header("location:index.php?recupera=".$usuario);
+
 }
 
 ?>
